@@ -1,7 +1,7 @@
 defmodule WeakRef.MixProject do
   use Mix.Project
 
-  @version "1.0.0"
+  @version "1.0.1"
   @name "WeakRef"
   @url "https://github.com/dominicletz/weak_ref"
   @maintainers ["Dominic Letz"]
@@ -10,7 +10,7 @@ defmodule WeakRef.MixProject do
     [
       app: :weak_ref,
       version: @version,
-      elixir: "~> 1.10",
+      elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: @name,
