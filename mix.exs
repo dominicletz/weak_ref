@@ -53,7 +53,7 @@ defmodule WeakRef.MixProject do
       licenses: ["MIT"],
       links: %{github: @url},
       files:
-        ~w(c_src src lib priv) ++
+        ~w(c_src lib) ++
           ~w(CHANGELOG.md LICENSE.md mix.exs README.md)
     ]
   end
