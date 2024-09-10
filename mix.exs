@@ -1,7 +1,7 @@
 defmodule WeakRef.MixProject do
   use Mix.Project
 
-  @version "1.0.1"
+  @version "1.0.2"
   @name "WeakRef"
   @url "https://github.com/dominicletz/weak_ref"
   @maintainers ["Dominic Letz"]
