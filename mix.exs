@@ -52,7 +52,7 @@ defmodule WeakRef.MixProject do
       maintainers: @maintainers,
       licenses: ["MIT"],
       links: %{github: @url},
-      files: ~w(c_src lib priv CHANGELOG.md LICENSE.md mix.exs README.md)
+      files: ~w(c_src lib priv/keep CHANGELOG.md LICENSE.md mix.exs README.md)
     ]
   end
 end
