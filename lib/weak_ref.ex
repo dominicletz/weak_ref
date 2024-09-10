@@ -3,7 +3,21 @@ defmodule WeakRef do
 
   @doc false
   def load_nifs do
-    :erlang.load_nif(~c"./priv/weak_ref_nif", 0)
+    :ok =
+      case :code.priv_dir(:weak_ref) do
+        {:error, :bad_name} ->
+          if File.dir?(Path.join("..", "priv")) do
+            Path.join("..", "priv")
+          else
+            "priv"
+          end
+
+        path ->
+          path
+      end
+      |> Path.join("weak_ref_nif")
+      |> String.to_charlist()
+      |> :erlang.load_nif(0)
   end
 
   @doc """
