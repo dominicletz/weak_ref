@@ -9,12 +9,12 @@ defmodule WeakRef.MixProject do
   def project do
     [
       app: :weak_ref,
-      version: @version,
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      name: @name,
       compilers: [:weak_ref] ++ Mix.compilers(),
+      version: @version,
+      name: @name,
       docs: docs(),
       package: package(),
       homepage_url: @url,
@@ -52,9 +52,7 @@ defmodule WeakRef.MixProject do
       maintainers: @maintainers,
       licenses: ["MIT"],
       links: %{github: @url},
-      files:
-        ~w(c_src lib) ++
-          ~w(CHANGELOG.md LICENSE.md mix.exs README.md)
+      files: ~w(c_src lib priv CHANGELOG.md LICENSE.md mix.exs README.md)
     ]
   end
 end
