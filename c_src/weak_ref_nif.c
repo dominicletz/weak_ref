@@ -9,7 +9,6 @@ static ErlNifResourceType *weak_ref_type;
 static ErlNifUInt64 weak_ref_counter;
 static ErlNifMutex *weak_ref_mutex;
 
-
 struct weak_ref {
     ErlNifPid owner;
     ErlNifUInt64 id;
@@ -33,15 +32,18 @@ weak_ref_new(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[])
     return enif_make_tuple2(env, res, id);
 }
 
-
 static void
 destruct_weak_ref_type(ErlNifEnv* env, void *arg)
 {
+    (void)env;
+
     struct weak_ref *wr = (struct weak_ref *) arg;
-    ERL_NIF_TERM id = enif_make_uint64(env, wr->id);
-    ERL_NIF_TERM down = enif_make_atom(env, "DOWN");
-    ERL_NIF_TERM ref = enif_make_atom(env, "weak_ref");
-    enif_send(env, &wr->owner, NULL, enif_make_tuple3(env, down, id, ref));
+    ErlNifEnv* msg_env = enif_alloc_env();  // Create new environment
+    ERL_NIF_TERM id = enif_make_uint64(msg_env, wr->id);
+    ERL_NIF_TERM down = enif_make_atom(msg_env, "DOWN");
+    ERL_NIF_TERM ref = enif_make_atom(msg_env, "weak_ref");
+    enif_send(NULL, &wr->owner, msg_env, enif_make_tuple3(msg_env, down, id, ref));
+    enif_free_env(msg_env);  // Free the environment
 }
 
 static int
